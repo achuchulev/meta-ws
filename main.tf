@@ -1,12 +1,13 @@
-data "tfe_organization" "free" {
-  name = "atanas-b"
+variable "my_org_name" {
+  default = "atanas-free"
 }
 
-output "org-id" {
-  value = data.tfe_organization.free.external_id
+data "tfe_organization" "org" {
+  name = var.my_org_name
 }
 
-resource "tfe_team" "test" {
-  name         = "my-test-team"
-  organization = data.tfe_organization.free.name
+resource "tfe_workspace" "test" {
+  name         = "meta_producer"
+  organization = data.tfe_organization.org.name
+  tag_names    = ["meta", "workspaces"]
 }
