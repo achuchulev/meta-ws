@@ -24,9 +24,4 @@ resource "tfe_workspace" "test" {
     identifier     = var.vcs_identifier
     oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
   }
-  lifecycle {
-    ignore_changes = [
-      resource_count,
-    ]
-  }
 }
